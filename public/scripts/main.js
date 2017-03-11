@@ -14,7 +14,7 @@ function addBlogs(posts) {
   })
 }
 
-$.get("gblog-firebase.firebaseapp.com/posts")
+$.get("https://gblog-dc.herokuapp.com/posts")
 .then(addBlogs)
 .catch(err => {
   console.log(err)
