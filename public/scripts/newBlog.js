@@ -5,15 +5,15 @@ $('.add-new').click(() => {
     body: $('#body').val(),
     title: $('#post_title').val()
   }
-  
-  $.ajax("/posts", {
+
+  $.ajax("https://gblog-dc.herokuapp.com/posts", {
     method: "POST",
     contentType: "application/json",
     data: JSON.stringify(newPost)
   })
   .then(result => {
     if(result == "Post Successful") {
-      window.location.href = "/index.html"
+      window.location.href = "https://gblog-dc.herokuapp.com/index.html"
     }
   })
   .catch(err => console.log(err))

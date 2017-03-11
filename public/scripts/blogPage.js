@@ -2,7 +2,7 @@ $(document).ready(() => {
 
   var urlArr = window.location.pathname.split('/')
   var id = urlArr[urlArr.length-1]
-  var url = '/posts/getPost/'+ id
+  var url = 'https://gblog-dc.herokuapp.com/posts/getPost/'+ id
 
   function parseBlog(post) {
     var date = (post.post_date).slice(0,10)
@@ -60,7 +60,7 @@ $(document).ready(() => {
   //click event to edit and submit comment modal
   $(document).on('click', '.modal-save', function() {
     var id = $(this).data('id')
-    var url = '/comments/'+id
+    var url = 'https://gblog-dc.herokuapp.com/comments/'+id
     var editedComment = {}
 
     editedComment.author_name = $('.comment-author').val(),
@@ -116,7 +116,7 @@ $(document).ready(() => {
   //click-event to create a new post object and submit it
   $(document).on('click', '.modal-save-post', function() {
     var id = $(this).data('id')
-    var editUrl = '/posts/'+id
+    var editUrl = 'https://gblog-dc.herokuapp.com/posts/'+id
     var editedPost = {}
 
     editedPost.id = id,
@@ -147,7 +147,7 @@ $(document).ready(() => {
         body: $('#body').val(),
         post_id: id
       }
-      const url = "/comments/"+id
+      const url = "https://gblog-dc.herokuapp.com/comments/"+id
       $.ajax(url, {
         method: "POST",
         contentType: "application/json",
@@ -165,7 +165,7 @@ $(document).ready(() => {
   //delete post by id
   function deletePost() {
     $('.delete').click(() => {
-      var deleteUrl = '/posts/'+ id
+      var deleteUrl = 'https://gblog-dc.herokuapp.com/posts/'+ id
       confirm("Are you sure you want to delete this post?")
       $.ajax(deleteUrl, {
         method: "DELETE"
@@ -177,8 +177,7 @@ $(document).ready(() => {
   function deleteComment() {
     $('.delete-comment').click(function() {
       var commentID = $(this).parent().attr('id')
-        var deleteUrl = '/comments/delete/'+ commentID
-        console.log(deleteUrl);
+        var deleteUrl = 'https://gblog-dc.herokuapp.com/comments/delete/'+ commentID
         confirm("Are you sure you want to delete this comment?")
         $.ajax(deleteUrl, {
         method: "DELETE"
