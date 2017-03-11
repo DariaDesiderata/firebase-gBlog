@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Create new blog post</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./stylesheets/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="header-wrap">
+      <header class="container">
+        <div class="row no-margin">
+          <div class="col s12 m12 l12">
+            <div id="mainLogo-wrap">
+              <a href="/index.html" id="mainLogo">
+              <img src="/stylesheets/gBlog.png" width="200" alt="gBlog">
+              </a>
+            </div>
+          </div>
+          <div class="header-nav col s12">
+            <nav id="nav">
+              <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="blogs">Archive</a></li>
+                <!--Stretch-->
+                <li><a href="login">Log in</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="container">
+      <div class="row-jumbo">
+        <img src="https://unsplash.it/1000/450" class="jumboImg"/>
+      </div>
+      <div class="row">
+        <form class="col s12 m8 l6">
+          <div class="row">
+            <div class="input-field col s12 m10 l12">
+              <input placeholder="Author name" id="author_name" type="text">
+              <label class="active" for="author">Author</label>
+            </div>
+            <div class="input-field col s12 m10 l12">
+              <input placeholder="Title" id="post_title" type="text">
+              <label class="active" for="title">Blog title</label>
+            </div>
+            <div class="input-field col s12 m10 l12">
+              <textarea placeholder="Write something" id="body" type="text" rows="50"></textarea>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light #42a5f5 blue lighten-1 col s6 add-new" type="submit" name="action">Add new post</button>
+        </form>
+      </div>
+    </div>
+    <footer class="page-footer relative">
+        <h6 class="center-align">© 2017 gBlog 2017 + Denver Colorado</h6>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+    integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <script src="./scripts/newBlog.js"></script>
+  </body>
+</html>
