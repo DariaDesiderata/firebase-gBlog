@@ -13,7 +13,7 @@ $('.add-new').click(() => {
   })
   .then(result => {
     if(result == "Post Successful") {
-      window.location.href = "https://gblog-dc.herokuapp.com/index.html"
+      window.location.href = "https://gblog-firebase.firebaseapp.com/index.html"
     }
   })
   .catch(err => console.log(err))

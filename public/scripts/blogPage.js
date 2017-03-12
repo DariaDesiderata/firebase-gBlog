@@ -2,7 +2,7 @@ $(document).ready(() => {
 
   var urlArr = window.location.pathname.split('/')
   var id = urlArr[urlArr.length-1]
-  var url = 'https://gblog-dc.herokuapp.com/posts/getPost/'+ id
+  var url = "https://gblog-dc.herokuapp.com/posts/getPost/"+ id
 
   function parseBlog(post) {
     var date = (post.post_date).slice(0,10)
@@ -60,7 +60,7 @@ $(document).ready(() => {
   //click event to edit and submit comment modal
   $(document).on('click', '.modal-save', function() {
     var id = $(this).data('id')
-    var url = 'https://gblog-dc.herokuapp.com/comments/'+id
+    var url = "https://gblog-dc.herokuapp.com/comments/"+id
     var editedComment = {}
 
     editedComment.author_name = $('.comment-author').val(),
