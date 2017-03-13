@@ -13,6 +13,10 @@ function addBlogs(posts) {
     )
   })
 }
+$(function(){
+    $('.caption').fadeIn(5000)
+  })
+
 
 $.get("https://gblog-dc.herokuapp.com/posts")
 .then(addBlogs)
