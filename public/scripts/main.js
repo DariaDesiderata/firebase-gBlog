@@ -8,7 +8,7 @@ function addBlogs(posts) {
         <h3>${post.post_title}</h3>
          <h5>Post by: ${post.author_name}</h5>
          <p class="overflow-ellipsis">${post.body}</p>
-         <a href='/posts/${post.id}'><p class="read-more">Read more</p></a>
+         <a href='/blogPage.html?id=${post.id}'><p class="read-more">Read more</p></a>
        </article>`
     )
   })

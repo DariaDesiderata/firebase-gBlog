@@ -1,8 +1,9 @@
 $(document).ready(() => {
 
-  var urlArr = window.location.pathname.split('/')
+  var urlArr = window.location.href.split('=')
   var id = urlArr[urlArr.length-1]
-  var url = "https://gblog-dc.herokuapp.com/posts/getPost/"+ id
+  var url = "https://gblog-dc.herokuapp.com/posts/"+ id
+
 
   function parseBlog(post) {
     var date = (post.post_date).slice(0,10)
@@ -35,8 +36,8 @@ $(document).ready(() => {
                         <textarea class="body" type="text">${comment.comment_body}</textarea>
                       </div>
                       <div>
-                        <a href="#!" data-id="${comment.id}" class="modal-action modal-close modal-save waves-effect btn-flat">Save</a>
-                        <a href="#!" class="modal-action modal-close modal-cancel waves-effect btn-flat">Cancel</a>
+                        <a href="/blogPage.html?id=${comment.post_id}" data-id="${comment.id}" class="modal-action modal-close modal-save waves-effect btn-flat">Save</a>
+                        <a href="/blogPage.html?id=${comment.post_id}" class="modal-action modal-close modal-cancel waves-effect btn-flat">Cancel</a>
                       </div>
                     </div>
                   </form>
@@ -58,16 +59,16 @@ $(document).ready(() => {
     $('#modal'+ id).modal('open')
   })
   //click event to edit and submit comment modal
-  $(document).on('click', '.modal-save', function() {
+  $(document).on('click', '.modal-save', function(event) {
+    event.preventDefault()
     var id = $(this).data('id')
     var url = "https://gblog-dc.herokuapp.com/comments/"+id
     var editedComment = {}
+    console.log(id, url)
 
     editedComment.author_name = $('.comment-author').val(),
     editedComment.comment_body = $('textarea.body').val(),
     editedComment.user_id = $('.comment-author').attr('id')
-
-
 
     $.ajax(url, {
       method: "PUT",
@@ -103,8 +104,8 @@ $(document).ready(() => {
                      <textarea class="body" type="text">${post.body}</textarea>
                    </div>
                    <div>
-                     <a href="#!" data-id="${post.id}" class="modal-action modal-close modal-save-post waves-effect btn-flat"><input type="submit"></a>
-                     <a href="#!" class="modal-action modal-close modal-cancel waves-effect btn-flat">Cancel</a>
+                     <a href="/blogPage.html?id=${post.id}" data-id="${post.id}" class="modal-action modal-close modal-save-post waves-effect btn-flat"><input type="submit"></a>
+                     <a href="/blogPage.html?id=${post.id}" class="modal-action modal-close modal-cancel waves-effect btn-flat">Cancel</a>
                    </div>
                  </div>
                </form>
@@ -113,14 +114,16 @@ $(document).ready(() => {
       )
     })
   }
-  //click-event to create a new post object and submit it
-  $(document).on('click', '.modal-save-post', function() {
+  //click-event to edit post and submit it
+  $(document).on('click', '.modal-save-post', function(event) {
+    event.preventDefault()
     var id = $(this).data('id')
     var editUrl = 'https://gblog-dc.herokuapp.com/posts/'+id
+    //create new post object
     var editedPost = {}
 
     editedPost.id = id,
-    editedPost.author_name = $('.comment-author').val(),
+    editedPost.author_name = $('.post-author').val(),
     editedPost.body = $('textarea.body').val(),
     editedPost.post_title = $('input.post-title').val()
 
@@ -131,7 +134,7 @@ $(document).ready(() => {
     })
     .then(function(result) {
       console.log(result);
-       window.location.reload()
+      window.location.reload()
     })
   })
   //add comment to a blog post
@@ -148,6 +151,7 @@ $(document).ready(() => {
         post_id: id
       }
       const url = "https://gblog-dc.herokuapp.com/comments/"+id
+
       $.ajax(url, {
         method: "POST",
         contentType: "application/json",
@@ -164,25 +168,28 @@ $(document).ready(() => {
 
   //delete post by id
   function deletePost() {
-    $('.delete').click(() => {
+    $('.delete').click(function(event) {
+      event.preventDefault()
       var deleteUrl = 'https://gblog-dc.herokuapp.com/posts/'+ id
+      console.log(deleteUrl);
       confirm("Are you sure you want to delete this post?")
       $.ajax(deleteUrl, {
         method: "DELETE"
       })
-      .then(window.location.href = "/index.html")
+      .then(function() {window.location.href = "/index.html"})
     })
   }
   //delete comment by id
   function deleteComment() {
-    $('.delete-comment').click(function() {
+    $('.delete-comment').click(function(event) {
+      event.preventDefault()
       var commentID = $(this).parent().attr('id')
-        var deleteUrl = 'https://gblog-dc.herokuapp.com/comments/delete/'+ commentID
-        confirm("Are you sure you want to delete this comment?")
-        $.ajax(deleteUrl, {
-        method: "DELETE"
+      var deleteUrl = 'https://gblog-dc.herokuapp.com/comments/delete/'+ commentID
+      confirm("Are you sure you want to delete this comment?")
+      $.ajax(deleteUrl, {
+      method: "DELETE"
       })
-      .then(window.location.reload())
+      .then(function() {window.location.reload()})
     })
   }
 
@@ -197,7 +204,7 @@ $(document).ready(() => {
       console.log(err)
     })
 
-  $.get("/comments")
+  $.get("https://gblog-dc.herokuapp.com/comments")
     .then(comments => {
       comments.forEach(comment => {
       appendComment(comment)
